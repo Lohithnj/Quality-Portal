@@ -8,7 +8,7 @@
                 <headerToolbar>
                     <OverflowToolbar>
                         <Title text="Inspection Lots" />
-                        <Spacer />
+                        <ToolbarSpacer />
                         <SearchField search="onSearch" width="30%" />
                     </OverflowToolbar>
                 </headerToolbar>

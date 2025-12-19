@@ -1,0 +1,29 @@
+<mvc:View controllerName="com.kaar.quality.controller.Login"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="loginPage" title="Quality Engineer Login" showHeader="false">
+                    <content>
+                        <VBox alignContent="Center" alignItems="Center" justifyContent="Center" class="sapUiLargeMarginTop">
+                            <Title text="Quality Portal" class="sapUiLargeMarginBottom" />
+                            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                <f:content>
+                                    <Label text="Username" />
+                                    <Input id="username" placeholder="Enter Username (e.g. 1)" value="1" />
+                                    <Label text="Password" />
+                                    <Input id="password" type="Password" placeholder="Enter Password" />
+                                    <Button text="Login" type="Emphasized" press="onLogin" width="100%" />
+                                </f:content>
+                            </f:SimpleForm>
+                        </VBox>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

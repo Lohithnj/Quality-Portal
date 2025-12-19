@@ -16,21 +16,18 @@
       "toolsId": "b32169cf-850e-4a05-a835-6859d1330cc3"
     },
     "dataSources": {
-      "ZBL_QUA_LOGIN_VIEW_CDS_VAN": {
-        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZBL_QUA_LOGIN_VIEW_CDS_VAN',Version='0001')/$value/",
-        "type": "ODataAnnotation",
-        "settings": {
-          "localUri": "localService/mainService/ZBL_QUA_LOGIN_VIEW_CDS_VAN.xml"
-        }
-      },
       "mainService": {
         "uri": "/sap/opu/odata/sap/ZBL_QUA_LOGIN_VIEW_CDS/",
         "type": "OData",
         "settings": {
-          "annotations": [
-            "ZBL_QUA_LOGIN_VIEW_CDS_VAN"
-          ],
           "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "inspectionService": {
+        "uri": "/sap/opu/odata/sap/ZBL_QUA_INSPECTION_VIEW_CDS/",
+        "type": "OData",
+        "settings": {
           "odataVersion": "2.0"
         }
       }
@@ -58,7 +55,8 @@
       "minUI5Version": "1.120.14",
       "libs": {
         "sap.m": {},
-        "sap.ui.core": {}
+        "sap.ui.core": {},
+        "sap.f": {}
       }
     },
     "contentDensities": {
@@ -75,7 +73,15 @@
       "": {
         "dataSource": "mainService",
         "preload": true,
-        "settings": {}
+        "settings": {
+          "useBatch": false
+        }
+      },
+      "inspection": {
+        "dataSource": "inspectionService",
+        "settings": {
+          "useBatch": false
+        }
       }
     },
     "resources": {
@@ -88,28 +94,59 @@
     "routing": {
       "config": {
         "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.kaar.quality.view",
         "controlAggregation": "pages",
         "controlId": "app",
-        "transition": "slide",
-        "type": "View",
-        "viewType": "XML",
-        "path": "com.kaar.quality.view",
-        "async": true,
-        "viewPath": "com.kaar.quality.view"
+        "clearControlAggregation": false
       },
       "routes": [
         {
-          "name": "RouteView1",
-          "pattern": ":?query:",
+          "name": "login",
+          "pattern": "",
           "target": [
-            "TargetView1"
+            "login"
+          ]
+        },
+        {
+          "name": "dashboard",
+          "pattern": "dashboard",
+          "target": [
+            "dashboard"
+          ]
+        },
+        {
+          "name": "inspectionLots",
+          "pattern": "inspectionLots",
+          "target": [
+            "inspectionLots"
+          ]
+        },
+        {
+          "name": "lotDetail",
+          "pattern": "lotDetail/{lotId}",
+          "target": [
+            "lotDetail"
           ]
         }
       ],
       "targets": {
-        "TargetView1": {
-          "id": "View1",
-          "name": "View1"
+        "login": {
+          "viewId": "login",
+          "viewName": "Login"
+        },
+        "dashboard": {
+          "viewId": "dashboard",
+          "viewName": "Dashboard"
+        },
+        "inspectionLots": {
+          "viewId": "inspectionLots",
+          "viewName": "InspectionLotList"
+        },
+        "lotDetail": {
+          "viewId": "lotDetail",
+          "viewName": "LotDetail"
         }
       }
     },

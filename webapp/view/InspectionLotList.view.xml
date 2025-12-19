@@ -1,0 +1,58 @@
+<mvc:View controllerName="com.kaar.quality.controller.InspectionLotList"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Page id="inspectionLotPage" title="Inspection Lots" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <Table id="inspectionTable" items="{inspection>/ZBL_QUA_INSPECTION_VIEW}" growing="true" growingThreshold="20">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="Inspection Lots" />
+                        <Spacer />
+                        <SearchField search="onSearch" width="30%" />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="Inspection Lot" />
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="Material" />
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="Material Desc" />
+                    </Column>
+                    <Column minScreenWidth="Desktop" demandPopin="true">
+                        <Text text="Plant" />
+                    </Column>
+                    <Column minScreenWidth="Desktop" demandPopin="true">
+                        <Text text="Type" />
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="Quantity" />
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="UoM" />
+                    </Column>
+                    <Column hAlign="Center">
+                        <Text text="Status" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation" press="onPressLot">
+                        <cells>
+                            <Text text="{inspection>InspectionLot}" />
+                            <Text text="{inspection>MaterialNumber}" />
+                            <Text text="{inspection>MaterialDesc}" />
+                            <Text text="{inspection>Plant}" />
+                            <Text text="{inspection>InspectionType}" />
+                            <Text text="{inspection>LotQuantity}" />
+                            <Text text="{inspection>UoM}" />
+                            <ObjectStatus text="{path: 'inspection>UsageDecisionCode', formatter: '.formatter.statusText'}" state="{path: 'inspection>UsageDecisionCode', formatter: '.formatter.statusState'}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

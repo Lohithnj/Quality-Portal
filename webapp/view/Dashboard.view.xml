@@ -1,0 +1,33 @@
+<mvc:View controllerName="com.kaar.quality.controller.Dashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout">
+    <Page id="dashboardPage" title="Quality Management Dashboard">
+        <headerContent>
+            <Button icon="sap-icon://log" press="onLogout" tooltip="Logout" />
+        </headerContent>
+        <content>
+            <VBox class="sapUiMediumMargin">
+                <Title text="Welcome, Quality Engineer" class="sapUiMediumMarginBottom" />
+                <HBox wrap="Wrap" justifyContent="Center">
+                    <GenericTile class="sapUiTinyMargin" header="Inspection Lot" subheader="View & Filter Lots" press="onPressInspectionLot">
+                        <TileContent>
+                            <ImageContent src="sap-icon://checklist-item" />
+                        </TileContent>
+                    </GenericTile>
+                    <GenericTile class="sapUiTinyMargin" header="Result Records" subheader="Enter Results" press="onPressInspectionLot">
+                        <TileContent>
+                            <ImageContent src="sap-icon://manager-insight" />
+                        </TileContent>
+                    </GenericTile>
+                    <GenericTile class="sapUiTinyMargin" header="Usage Decision" subheader="Make Decisions" press="onPressInspectionLot">
+                        <TileContent>
+                            <ImageContent src="sap-icon://decision" />
+                        </TileContent>
+                    </GenericTile>
+                </HBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

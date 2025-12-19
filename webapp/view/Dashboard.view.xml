@@ -11,19 +11,19 @@
             <VBox class="sapUiMediumMargin">
                 <Title text="Welcome, Quality Engineer" class="sapUiMediumMarginBottom" />
                 <HBox wrap="Wrap" justifyContent="Center">
-                    <GenericTile class="sapUiTinyMargin" header="Inspection Lot" subheader="View &amp; Filter Lots" press="onPressInspectionLot">
-                        <TileContent>
-                            <ImageContent src="sap-icon://checklist-item" />
+                    <GenericTile class="sapUiTinyMargin" header="Inspection Lot" subheader="All Lots" press="onPressAllLots">
+                        <TileContent unit="Lots" footer="Total Count">
+                            <NumericContent value="{inspection>/ZBL_QUA_INSPECTION_VIEW/$count}" icon="sap-icon://checklist-item" />
                         </TileContent>
                     </GenericTile>
-                    <GenericTile class="sapUiTinyMargin" header="Result Records" subheader="Enter Results" press="onPressInspectionLot">
-                        <TileContent>
-                            <ImageContent src="sap-icon://manager-insight" />
+                    <GenericTile class="sapUiTinyMargin" header="Result Records" subheader="Pending Entry" press="onPressResults">
+                        <TileContent unit="Lots" footer="Action Needed">
+                            <NumericContent value="{inspection>/ZBL_QUA_INSPECTION_VIEW/$count}" valueColor="Critical" icon="sap-icon://manager-insight" />
                         </TileContent>
                     </GenericTile>
-                    <GenericTile class="sapUiTinyMargin" header="Usage Decision" subheader="Make Decisions" press="onPressInspectionLot">
-                        <TileContent>
-                            <ImageContent src="sap-icon://decision" />
+                    <GenericTile class="sapUiTinyMargin" header="Usage Decision" subheader="Pending Decisions" press="onPressUsage">
+                        <TileContent unit="Lots" footer="Decision Needed">
+                            <NumericContent value="{inspection>/ZBL_QUA_INSPECTION_VIEW/$count}" valueColor="Error" icon="sap-icon://decision" />
                         </TileContent>
                     </GenericTile>
                 </HBox>

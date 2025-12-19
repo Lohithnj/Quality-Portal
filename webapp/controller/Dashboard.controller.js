@@ -7,7 +7,15 @@ sap.ui.define([
         onInit: function () {
         },
 
-        onPressInspectionLot: function () {
+        onPressAllLots: function () {
+            this.getOwnerComponent().getRouter().navTo("inspectionLots");
+        },
+
+        onPressResults: function () {
+            this.getOwnerComponent().getRouter().navTo("inspectionLots");
+        },
+
+        onPressUsage: function () {
             this.getOwnerComponent().getRouter().navTo("inspectionLots");
         },
 

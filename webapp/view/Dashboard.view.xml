@@ -11,7 +11,7 @@
             <VBox class="sapUiMediumMargin">
                 <Title text="Welcome, Quality Engineer" class="sapUiMediumMarginBottom" />
                 <HBox wrap="Wrap" justifyContent="Center">
-                    <GenericTile class="sapUiTinyMargin" header="Inspection Lot" subheader="View & Filter Lots" press="onPressInspectionLot">
+                    <GenericTile class="sapUiTinyMargin" header="Inspection Lot" subheader="View &amp; Filter Lots" press="onPressInspectionLot">
                         <TileContent>
                             <ImageContent src="sap-icon://checklist-item" />
                         </TileContent>

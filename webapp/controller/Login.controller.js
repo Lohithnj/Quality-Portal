@@ -1,8 +1,10 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageBox",
-    "sap/ui/model/json/JSONModel"
-], function (Controller, MessageBox, JSONModel) {
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+], function (Controller, MessageBox, JSONModel, Filter, FilterOperator) {
     "use strict";
 
     return Controller.extend("com.kaar.quality.controller.Login", {
@@ -14,26 +16,37 @@ sap.ui.define([
             var sUsername = oView.byId("username").getValue();
             var sPassword = oView.byId("password").getValue();
 
-            if (!sUsername) {
-                MessageBox.error("Please enter username");
+            if (!sUsername || !sPassword) {
+                MessageBox.error("Please enter both username and password");
                 return;
             }
 
             var oModel = this.getOwnerComponent().getModel();
-            var sPath = "/ZBL_QUA_LOGIN_VIEW(username='" + sUsername + "')";
+
+            // Using filters ensures the backend checks both fields
+            var aFilters = [
+                new Filter("username", FilterOperator.EQ, sUsername),
+                new Filter("password", FilterOperator.EQ, sPassword)
+            ];
 
             oView.setBusy(true);
-            oModel.read(sPath, {
+            oModel.read("/ZBL_QUA_LOGIN_VIEW", {
+                filters: aFilters,
                 success: function (oData) {
                     oView.setBusy(false);
-                    if (oData.login_status === "Success") {
-                        // Store user info if needed
-                        sap.ui.getCore().setModel(new JSONModel(oData), "userModel");
-                        // Navigate to dashboard
-                        var oRouter = this.getOwnerComponent().getRouter();
-                        oRouter.navTo("dashboard");
+                    // Check if any matching user was returned with Success status
+                    if (oData.results && oData.results.length > 0) {
+                        var oUser = oData.results[0];
+                        if (oUser.login_status === "Success") {
+                            // Store user info
+                            sap.ui.getCore().setModel(new JSONModel(oUser), "userModel");
+                            // Navigate to dashboard
+                            this.getOwnerComponent().getRouter().navTo("dashboard");
+                        } else {
+                            MessageBox.error("Authentication Failed: Invalid credentials");
+                        }
                     } else {
-                        MessageBox.error("Authentication Failed: " + (oData.message || "Invalid credentials"));
+                        MessageBox.error("Authentication Failed: User not found or incorrect password");
                     }
                 }.bind(this),
                 error: function (oError) {
@@ -42,7 +55,7 @@ sap.ui.define([
                     try {
                         var oResponse = JSON.parse(oError.responseText);
                         sMsg = oResponse.error.message.value;
-                    } catch (e) {}
+                    } catch (e) { }
                     MessageBox.error(sMsg);
                 }
             });
